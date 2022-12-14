@@ -90,7 +90,7 @@ const connectDatabase=async()=>{
         const error=new Error('Failed to connect Database');
         throw error;
     }
-    app.listen(8080)
+    app.listen(process.env.PORT||8080)
     console.log('Database Connected!!')
    }catch(err){
     console.log('Error:---->',err)

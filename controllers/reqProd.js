@@ -53,11 +53,11 @@ exports.ProcessReq = async (req, res, next) => {
 
         let updatedDelivery;
 
-        if (DeliverySatus === "ToDo" && mode === "accept") {
-            updatedDelivery = "Inprogress"
+        if (DeliverySatus === "Ordered" && mode === "accept") {
+            updatedDelivery = "Shipped"
         }
 
-        if (DeliverySatus === "Inprogress" && mode === "accept") {
+        if (DeliverySatus === "Shipped" && mode === "accept") {
             updatedDelivery = "Delivered"
         }
         if(mode==="reject"){
@@ -75,6 +75,7 @@ exports.ProcessReq = async (req, res, next) => {
             const error = new Error('Request Not Found');
             throw error;
         }
+
         const orderOfProduct=await Order.findById(orderId);
         if (!orderOfProduct) {
             const error = new Error('order Not Found');
@@ -86,6 +87,8 @@ exports.ProcessReq = async (req, res, next) => {
            RequestedProduct.isDeliverd=updatedDelivery;
            orderOfProduct.products[prodItemIndex]=RequestedProduct;
            const updatedOrderandReq = await orderOfProduct.save();
+           console.log(updatedOrderandReq);
+
            res.status(201).json({
                message: "request updated successfully",
                request: updatedRequestByProduct

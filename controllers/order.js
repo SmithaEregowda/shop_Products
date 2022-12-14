@@ -58,7 +58,7 @@ exports.postOrder = async (req, res, next) => {
             let requesterUserId=req.body.userId;
             let reQusetedProd=product?._id;
             let ProdUserId=product?.userId;
-            let DeliverySatus="ToDo"
+            let DeliverySatus="Ordered"
             let orderId=newOrder?._id;
             const reqObj=new ProductReqs({
                 requesterUserId,

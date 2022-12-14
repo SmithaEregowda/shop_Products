@@ -15,7 +15,7 @@ const OrdersSchema = new Schema({
         quantity:Number,
         isDeliverd: {
             type: String,
-            default: "ToDo"
+            default: "Ordered"
         },
     }
     ],
