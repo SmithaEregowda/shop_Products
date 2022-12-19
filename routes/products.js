@@ -10,7 +10,7 @@ const {
 
 const isAuthenticated = require('../middleware/isauth')
 
-router.get('/', isAuthenticated, getAllProducts)
+router.get('/', getAllProducts)
 
 router.post('/create', isAuthenticated, AddProducts)
 
