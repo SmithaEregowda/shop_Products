@@ -20,7 +20,13 @@ const OrdersSchema = new Schema({
     }
     ],
     totalPrice:Number,
-    Address:String,
+    Address:{
+        address1:String,
+        address2:String,
+        city:String,
+        state:String,
+        pincode:String
+    },
     PayMentMode:String
 })
 
