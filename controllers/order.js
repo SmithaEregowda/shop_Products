@@ -43,7 +43,7 @@ exports.postOrder = async (req, res, next) => {
             products: product,
             totalPrice: totalPrice,
             Address: Address,
-            PayMentMode: PayMentMode,
+            payment: PayMentMode,
             isDeliverd: isDeliverd
         })
 

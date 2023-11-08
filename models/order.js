@@ -27,7 +27,7 @@ const OrdersSchema = new Schema({
         state:String,
         pincode:String
     },
-    PayMentMode:String
+    payment:Object
 })
 
 module.exports = mongoose.model('Order', OrdersSchema)
