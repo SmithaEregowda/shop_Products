@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const AddressSchema = mongoose.Schema({
+    city: String,
+    street: String,
+    houseNumber: String,
+  });
+  const PaymentSchema = mongoose.Schema({
+    paymentType: String,
+    paymentinrs: String,
+    paymentdetails:String
+  });
+
 const OrdersSchema = new Schema({
     userId:{
         type:Schema.Types.ObjectId,
@@ -21,13 +32,11 @@ const OrdersSchema = new Schema({
     ],
     totalPrice:Number,
     Address:{
-        address1:String,
-        address2:String,
-        city:String,
-        state:String,
-        pincode:String
+        type:AddressSchema
     },
-    payment:Object
+    payment:{
+        type:PaymentSchema
+    }
 })
 
 module.exports = mongoose.model('Order', OrdersSchema)
