@@ -2,10 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AddressSchema = mongoose.Schema({
+    address1:String,
     city: String,
-    street: String,
-    houseNumber: String,
+    state: String,
+    pincode: String,
   });
+  
+
+//   mongoose.model('Address',AddressSchema)
+
   const PaymentSchema = mongoose.Schema({
     paymentType: String,
     paymentinrs: String,
@@ -31,12 +36,10 @@ const OrdersSchema = new Schema({
     }
     ],
     totalPrice:Number,
-    Address:{
-        type:AddressSchema
-    },
-    payment:{
-        type:PaymentSchema
-    }
+    address: {
+        type: AddressSchema,
+        required: true,
+      }
 })
 
 module.exports = mongoose.model('Order', OrdersSchema)

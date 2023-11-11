@@ -16,7 +16,12 @@ exports.postOrder = async (req, res, next) => {
         let userId = req.body.userId;
         let prodId = req.body.prodId;
         let totalPrice = req.body?.totalPrice;
-        let Address = req.body?.Address;
+          let address={
+            address1:req?.body?.address1,
+            city:req?.body?.city,
+            state:req?.body?.state,
+            pincode:req?.body?.pincode
+        }
         let PayMentMode = req.body?.PayMentMode;
         let isDeliverd = req.body?.isDeliverd;
         let isfromcart = req.body.isfromcart;
@@ -42,9 +47,9 @@ exports.postOrder = async (req, res, next) => {
             userId: userId,
             products: product,
             totalPrice: totalPrice,
-            Address: Address,
             payment: PayMentMode,
-            isDeliverd: isDeliverd
+            isDeliverd: isDeliverd,
+            address:address
         })
 
         const newOrder = await createorder.save();

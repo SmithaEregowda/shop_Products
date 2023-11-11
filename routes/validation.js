@@ -57,7 +57,6 @@ exports.cartValidator=[[
 exports.OrderValidator=[[
     body('userId').trim().not().isEmpty().withMessage('userId is required'),
     body('prodId').trim().not().isEmpty().withMessage('product Id is required'),
-    body('Address').trim().not().isEmpty().withMessage('Address is required'),
     body('totalPrice').trim().not().isEmpty().withMessage('totalPrice is required'),
     body('PayMentMode').trim().not().isEmpty().withMessage('PayMentMode is required'),
     // body('isDeliverd').trim().not().isEmpty().withMessage('isDeliverd is required')
