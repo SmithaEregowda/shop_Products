@@ -117,3 +117,34 @@ exports.getOrderByUser = async (req, res, next) => {
         next(err)
     }
 }
+
+exports.getOrderById=async (req,res,next)=>{
+    try{
+        
+        let orderId = req.params.orderId;
+        if(!orderId) {
+            const error = new Error('please provide orderId');
+            error.statusCode = 404;
+            throw error
+        }
+
+        const orderByIddata=await Order.findById({_id:orderId});
+        
+        if(!orderByIddata){
+            const error = new Error('orders not found for the given orderID');
+            error.statusCode = 404;
+            throw error 
+        }
+        let orderproducts=orderByIddata?.products;
+        let productIds=orderproducts?.map((item)=>item?._id)
+        const listofproducts=await Product.find({_id: {$in: productIds}});
+        res.status(200).json({
+            message: "ordered fetched successfully",
+            order: orderByIddata,
+            orderedproducts:listofproducts
+        });
+
+    }catch (err){
+        next(err)
+    }
+}
