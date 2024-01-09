@@ -18,6 +18,7 @@ exports.getAllProducts = async (req, res, next) => {
             throw error;
         }
         res.status(200).json({
+            status:200,
             products: AllProducts,
             pagination: {
                 offset,
@@ -47,6 +48,7 @@ exports.getProductById = async (req, res, next) => {
         }
 
         res.status(200).json({
+            status:200,
             message: 'product retreived successfully',
             product
         })
@@ -77,6 +79,7 @@ exports.getProductByUserId = async (req, res, next) => {
         }
 
         res.status(200).json({
+            status:200,
             message: 'products retreived successfully',
             products,
             pagination: {
@@ -130,6 +133,7 @@ exports.AddProducts = async (req, res, next) => {
         productUser.save();
 
         res.status(200).json({
+            status:200,
             message: 'product created successfully',
             product: createdProduct
         })
@@ -172,6 +176,7 @@ exports.updateProduct = async (req, res, next) => {
             throw error
         }
         res.status(200).json({
+            status:200,
             message: 'product updated successfully',
             product: updatedProduct
         })
@@ -210,6 +215,7 @@ exports.deleteProductById = async (req, res, next) => {
         
         clearImage(product?.productImg)
         res.status(200).json({
+            status:200,
             message: 'product removed successfully',
             _id: product._id
         })

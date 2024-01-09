@@ -54,7 +54,8 @@ exports.Signup = async (req, res, next) => {
             } else {
                 res.status(201).json({
                     message: 'Created Scucessfully',
-                    user: result?._id
+                    user: result?._id,
+                    status:200,
                 })
             }
         })
@@ -100,7 +101,8 @@ exports.login = async (req, res, next) => {
         res.status(200).json({
             message: "Logged in successfully",
             token: token,
-            user: loggedUser?._id
+            user: loggedUser?._id,
+            status:200
         })
 
     } catch (err) {
@@ -124,6 +126,7 @@ exports.getuser = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'user retrived successfully',
+            status:200,
             user: loggedUser
         })
 
@@ -153,6 +156,7 @@ exports.getAllUsers = async (req, res, next) => {
         }
         res.status(200).json({
             message: 'users retrived successfully',
+            status:200,
             user: filterdUsers
         })
 
@@ -191,6 +195,7 @@ exports.forgotPassword = async (req, res, next) => {
             reqstedUser.save();
             res.status(200).json({
                 message: 'reset link send to mail  successfully',
+                status:200,
                 link: `/reset-password/${token}`
             })
         })
@@ -235,6 +240,7 @@ exports.resetPassword = async (req, res, next) => {
 
         res.status(200).json({
             message: 'password reseted  successfully',
+            status:200
         });
     } catch (err) {
         next(err)
@@ -276,7 +282,8 @@ exports.UpdateUser = async (req, res, next) => {
 
         res.status(200).json({
             message: 'user updated successfully',
-            user: updatedUser
+            user: updatedUser,
+            status:200
         });
     } catch (err) {
         next(err)

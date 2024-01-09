@@ -41,6 +41,7 @@ exports.postWishlist = async (req, res, next) => {
             }
 
             res.status(201).json({
+                status:200,
                 message: "product moved to WishList successfully",
                 wishlist: newWishlist
             })
@@ -53,6 +54,7 @@ exports.postWishlist = async (req, res, next) => {
 
             if (ProductIndex > -1) {
                 res.status(201).json({
+                    status:200,
                     message: "product alerady Exist in wishlist",
                     wishlist: userWishList
                 })
@@ -66,6 +68,7 @@ exports.postWishlist = async (req, res, next) => {
                 const updatedWishlist = await userWishList.save();
 
                 res.status(201).json({
+                    status:200,
                     message: "added to wishlist successfully",
                     wishlist: updatedWishlist
                 })
@@ -86,6 +89,7 @@ exports.getWishList = async (req, res, next) => {
             throw error
         }
         res.status(201).json({
+            status:200,
             message: "wishlist retrieved successfully",
             wishlist: UserWishList
         })
@@ -112,6 +116,7 @@ exports.removeFromWishList = async (req, res, next) => {
         const updatedWishList = await userWishList.save();
 
         res.status(201).json({
+            status:200,
             message: "product removed from WishList successfully",
             WishList: updatedWishList
         })

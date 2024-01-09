@@ -6,6 +6,7 @@ module.exports=(error,req,res,next)=>{
         const data=error.data//original error data from midlewares
         res.status(status).json({
           message:message,
+          status:status,
           data:data
         })
     }

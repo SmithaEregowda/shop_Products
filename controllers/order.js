@@ -82,6 +82,7 @@ exports.postOrder = async (req, res, next) => {
         }
 
         res.status(201).json({
+            status:200,
             message: "ordered successfully",
             orderDetails: newOrder
         })
@@ -109,6 +110,7 @@ exports.getOrderByUser = async (req, res, next) => {
             throw error 
         }
         res.status(200).json({
+            status:200,
             message: "ordered fetched successfully",
             orderDetails: ordersByUser
         })
@@ -139,6 +141,7 @@ exports.getOrderById=async (req,res,next)=>{
         let productIds=orderproducts?.map((item)=>item?._id)
         const listofproducts=await Product.find({_id: {$in: productIds}});
         res.status(200).json({
+            status:200,
             message: "ordered fetched successfully",
             order: orderByIddata,
             orderedproducts:listofproducts

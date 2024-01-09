@@ -41,6 +41,7 @@ exports.postCart = async (req, res, next) => {
                 throw error
             }
             res.status(201).json({
+                status:200,
                 message: "product moved to cart successfully",
                 cart: newCart
             })
@@ -54,6 +55,7 @@ exports.postCart = async (req, res, next) => {
                 userCart.products[ProductIndex] = productItem;
                 const updatedCart = await userCart.save();
                 res.status(201).json({
+                    status:200,
                     message: "cart updated successfully",
                     cart: updatedCart
                 })
@@ -64,6 +66,7 @@ exports.postCart = async (req, res, next) => {
                 });
                 const updatedCart = await userCart.save();
                 res.status(201).json({
+                    status:200,
                     message: "cart updated successfully",
                     cart: updatedCart
                 })
@@ -87,6 +90,7 @@ exports.getCart = async (req, res, next) => {
             throw error
         }
         res.status(201).json({
+            status:200,
             message: "cart retrieved successfully",
             cart: userCart
         })
@@ -112,6 +116,7 @@ exports.removefromCart = async (req, res, next) => {
         const updatedCart = await userCart.save();
 
         res.status(201).json({
+            status:200,
             message: "product removed from cart successfully",
             cart: updatedCart
         })
@@ -139,7 +144,8 @@ exports.clearCart = async (req, res, next) => {
         }
 
         res.status(201).json({
-            message: "cart cleared successfully"
+            message: "cart cleared successfully",
+            status:200
         })
 
     } catch (err) {

@@ -12,12 +12,14 @@ exports.postPayment = async (req, res, next) => {
       });
      
       res.json({
+        status:200,
         message: "Payment Successful",
         success: true,
       });
     } catch (error) {
         console.log(error)
       res.json({
+        status:400,
         message: "Payment Failed",
         success: false,
       });
