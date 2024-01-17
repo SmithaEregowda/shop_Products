@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator')
 const Order = require('../models/order')
 const Product = require('../models/product')
 const ProductReqs=require('../models/productReqs')
+const { default: mongoose } = require('mongoose')
 
 exports.postOrder = async (req, res, next) => {
     const errors = validationResult(req);
@@ -148,6 +149,52 @@ exports.getOrderById=async (req,res,next)=>{
         });
 
     }catch (err){
+        next(err)
+    }
+}
+
+exports.UpdateOrder = async (req, res, next) => {
+    // const errors=validationResult(req);
+    const orderId = req.params.orderId;
+    try {
+        let orderobj = await Order.findById(orderId);
+        if(!orderobj){
+            const error = new Error('order not found');
+            error.statusCode = 400;
+            throw error
+        }
+        let productobjs=orderobj?.products
+
+        let cancelproductIndex=orderobj?.products?.findIndex((prd)=>prd._id.toString()===req.body.prodId);
+
+        if(cancelproductIndex===-1){
+            const error = new Error('Invalid product has been sent');
+            error.statusCode = 400;
+            throw error 
+        }
+
+        let cancelprodObj=productobjs[cancelproductIndex];
+        cancelprodObj["isDeliverd"]="Canceled";
+        productobjs[cancelproductIndex]=cancelprodObj;
+        orderobj.products=productobjs;
+
+         const orderUpdatedObj = await Order.findByIdAndUpdate(
+                orderId,
+                {...orderobj},
+                { new: true }
+            );
+        
+        if (!orderUpdatedObj) {
+            const error = new Error('cancel order Failed');
+            error.statusCode = 400;
+            throw error
+        }
+        res.status(200).json({
+            status:200,
+            message: 'product updated successfully',
+            order: orderUpdatedObj
+        })
+    } catch (err) {
         next(err)
     }
 }
