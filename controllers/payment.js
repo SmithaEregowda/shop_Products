@@ -14,6 +14,7 @@ exports.postPayment = async (req, res, next) => {
       res.json({
         status:200,
         message: "Payment Successful",
+        paidamount:amount,
         success: true,
       });
     } catch (error) {
