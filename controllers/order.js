@@ -104,7 +104,7 @@ exports.getOrderByUser = async (req, res, next) => {
             error.statusCode = 404;
             throw error
         }
-        const ordersByUser=await Order.find({userId:userId});
+        const ordersByUser=await Order.find({userId:userId}).sort({_id:-1});
         if(!ordersByUser){
             const error = new Error('orders not found for the usr');
             error.statusCode = 404;
