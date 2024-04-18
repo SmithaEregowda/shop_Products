@@ -289,3 +289,30 @@ exports.UpdateUser = async (req, res, next) => {
         next(err)
     }
 }
+
+exports.removeUser = async (req, res, next) => {
+    try {
+        let userId = req.params.userId;
+        if (!userId) {
+            const error = new Error('Invalid User ID');
+            throw error;
+        }
+       
+            let removedUser = await User.findByIdAndRemove(userId);
+
+        if (!removedUser) {
+            const error = new Error('User Not Found');
+            error.statusCode = 400;
+            throw error
+        }
+
+
+        res.status(200).json({
+            message: 'user removed successfully',
+            user: removedUser,
+            status:200
+        });
+    } catch (err) {
+        next(err)
+    }
+}

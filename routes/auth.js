@@ -7,7 +7,8 @@ const
         forgotPassword,
         resetPassword,
         UpdateUser,
-        getAllUsers
+        getAllUsers,
+        removeUser
     } = require('../controllers/auth')
 const
     {
@@ -29,5 +30,6 @@ router.put('/update-user/:userId', isAuthenticated, UpdateUser)
 
 router.post('/forgot-password', forgotPassValidator, forgotPassword)
 
-router.post('/reset-password/:token', resetValidator, resetPassword)
+router.post('/reset-password/:token', resetValidator, resetPassword);
+router.delete('/userId',isAuthenticated,removeUser)
 module.exports = router
