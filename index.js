@@ -34,10 +34,19 @@ const productImageStorage=multer.diskStorage({
   }
 })
 
-app.use(cors())
+app.use(cors());
+
 //static path to access profile images
-app.use('/profileImages',express.static(path.join(__dirname,'profileImages')))
-app.use(`/productImages`,express.static(path.join(__dirname,process.env.PRODUCT_IMAGES_PATH)))
+app.use('/profileImages',express.static(path.join(__dirname,'profileImages')));
+
+const productImagesPath = process.env.PRODUCT_IMAGES_PATH;
+
+if (!productImagesPath) {
+    console.error('PRODUCT_IMAGES_PATH environment variable is not defined.');
+    process.exit(1);
+}
+
+app.use(`/productImages`,express.static(path.join(__dirname, productImagesPath)))
 
 // app.use(`/${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`,
 // express.static(path.join(__dirname,`${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`)))
