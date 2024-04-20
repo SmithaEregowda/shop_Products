@@ -8,7 +8,7 @@ const wishlistRoutes=require('./routes/wishlist')
 const orderRoutes=require('./routes/order')
 const paymentRoutes=require('./routes/payment');
 const ProductReqRoutes=require('./routes/reqsProd')
-
+require('dotenv').config()
 const BodyParser=require('body-parser')
 const ErrorHandler=require('./middleware/errorHandler')
 const multer=require('multer');
@@ -38,7 +38,9 @@ app.use(cors())
 //static path to access profile images
 app.use('/profileImages',express.static(path.join(__dirname,'profileImages')))
 
-app.use('/productImages',express.static(path.join(__dirname,'productImages')))
+console.log("Image Path",process.env.PRODUCT_IMAGES_PATH)
+
+app.use(`/${process.env.PRODUCT_IMAGES_PATH}`,express.static(path.join(__dirname,`${process.env.PRODUCT_IMAGES_PATH}`)))
 
 //allowing headers from clients
 app.use((req,res,next)=>{
@@ -93,6 +95,7 @@ const connectDatabase=async()=>{
         const error=new Error('Failed to connect Database');
         throw error;
     }
+    console.log(process.env.PORT)
     app.listen(process.env.PORT||8080)
     console.log('Database Connected!!')
    }catch(err){
