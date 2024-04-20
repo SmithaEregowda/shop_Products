@@ -44,6 +44,7 @@ app.use(`/productImages`,express.static(path.join(__dirname,`productImages`)))
 
 //allowing headers from clients
 app.use((req,res,next)=>{
+  console.log(process.env.PRODUCT_IMAGES_PATH)
     res.setHeader('Access-Control-Allow-Origin','*');
       //*:--->it will allow access for all the clients
     res.setHeader('Access-Control-Allow-Methods','GET,POST,DELETE,PUT,PATCH');
