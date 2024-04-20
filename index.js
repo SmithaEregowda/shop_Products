@@ -38,9 +38,8 @@ app.use(cors())
 //static path to access profile images
 app.use('/profileImages',express.static(path.join(__dirname,'profileImages')))
 
-console.log("Image Path",process.env.PRODUCT_IMAGES_PATH)
-
-app.use(`/${process.env.PRODUCT_IMAGES_PATH}`,express.static(path.join(__dirname,`${process.env.PRODUCT_IMAGES_PATH}`)))
+app.use(`/${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`,
+express.static(path.join(__dirname,`${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`)))
 
 //allowing headers from clients
 app.use((req,res,next)=>{
@@ -95,7 +94,7 @@ const connectDatabase=async()=>{
         const error=new Error('Failed to connect Database');
         throw error;
     }
-    console.log(process.env.PORT)
+
     app.listen(process.env.PORT||8080)
     console.log('Database Connected!!')
    }catch(err){
