@@ -37,7 +37,7 @@ const productImageStorage=multer.diskStorage({
 app.use(cors())
 //static path to access profile images
 app.use('/profileImages',express.static(path.join(__dirname,'profileImages')))
-app.use(`/productImages`,express.static(path.join(__dirname,`productImages`)))
+app.use(`/productImages`,express.static(path.join(__dirname,process.env.PRODUCT_IMAGES_PATH)))
 
 // app.use(`/${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`,
 // express.static(path.join(__dirname,`${process.env.PRODUCT_IMAGES_PATH?process.env.PRODUCT_IMAGES_PATH:'productImages'}`)))
