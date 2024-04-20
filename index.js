@@ -28,7 +28,7 @@ const ImageStorage=multer.diskStorage({
 })
 
 const productImageStorage=multer.diskStorage({
-  destination:'productImages',
+  destination:process.env.PRODUCT_IMAGES_PATH,
   filename:(req,file,cb)=>{
     cb(null,file.originalname)
   }
