@@ -225,6 +225,32 @@ exports.deleteProductById = async (req, res, next) => {
     }
 }
 
+exports.getProductsByIds=async(req,res,next)=>{
+    const prodIds = req.query.prodIds? req.query.prodIds:[];
+    try {
+        if (!prodIds) {
+            const error = new Error('please provide Valid product Ids');
+            error.statusCode = 400;
+            throw error;
+        }
+        const products = await Product.find({_id: {$in: prodIds}});
+        if (!products) {
+            const error = new Error('products not fetched successfully');
+            error.statusCode = 400;
+            throw error;
+        }
+
+        res.status(200).json({
+            status:200,
+            message: 'products retreived successfully',
+            products
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
 const clearImage = (filepath) => {
     filepath = path.join(__dirname, '..', filepath);
     fs.unlink(filepath, err => { //it will delete the file in that filepath

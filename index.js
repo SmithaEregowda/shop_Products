@@ -14,6 +14,7 @@ const ErrorHandler=require('./middleware/errorHandler')
 const multer=require('multer');
 const path=require('path');
 const cors=require('cors')
+const stripe=require('stripe')('sk_test_51LSgoUSFmHpNb8iUIm6rnGBowqIkb4cOlvXztOjGjvPXIsyeYk5WadcmM8D4QKXtU9VFguyxDxPVVfrCsKXIozkx00fnQ4x6aP')
 
 //to parse incoming req
  app.use(BodyParser.json())
@@ -84,7 +85,28 @@ app.use('/api',paymentRoutes)
 app.use('/api',ProductReqRoutes)
 
 //error handling middleware
-app.use(ErrorHandler)
+app.use(ErrorHandler);
+
+const calculateOrderAmount = items => {
+  // Replace this constant with a calculation of the order's amount
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client
+  return 1400;
+};
+
+app.post("/api/create-payment-intent", async (req, res) => {
+  const { items } = req.body;
+  console.log("comming")
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: calculateOrderAmount(items),
+    currency: "usd"
+  });
+  console.log("data",paymentIntent.client_secret)
+  res.send({
+    clientSecret: paymentIntent.client_secret
+  });
+});
 
 //connecting data base
 const connectDatabase=async()=>{

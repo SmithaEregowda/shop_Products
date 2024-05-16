@@ -5,12 +5,15 @@ const {
     getProductById,
     deleteProductById,
     updateProduct,
-    getProductByUserId
+    getProductByUserId,
+    getProductsByIds
 } = require('../controllers/products')
 
 const isAuthenticated = require('../middleware/isauth')
 
-router.get('/', getAllProducts)
+router.get('/', getAllProducts);
+
+router.put('/prodids', isAuthenticated, getProductsByIds);
 
 router.post('/create', isAuthenticated, AddProducts)
 
