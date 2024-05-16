@@ -226,7 +226,7 @@ exports.deleteProductById = async (req, res, next) => {
 }
 
 exports.getProductsByIds=async(req,res,next)=>{
-    const prodIds = req.query.prodIds? req.query.prodIds:[];
+    const prodIds = req.query.prodIds? req.query.prodIds.split(','):[];
     try {
         if (!prodIds) {
             const error = new Error('please provide Valid product Ids');
