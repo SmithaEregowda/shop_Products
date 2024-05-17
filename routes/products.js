@@ -13,7 +13,7 @@ const isAuthenticated = require('../middleware/isauth')
 
 router.get('/', getAllProducts);
 
-router.put('/prodids', isAuthenticated, getProductsByIds);
+router.get('/prodids', isAuthenticated, getProductsByIds);
 
 router.post('/create', isAuthenticated, AddProducts)
 
